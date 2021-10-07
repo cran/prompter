@@ -13,7 +13,9 @@ add_prompt(
   permanent = FALSE,
   rounded = FALSE,
   animate = TRUE,
-  bounce = FALSE
+  bounce = FALSE,
+  arrow = TRUE,
+  shadow = TRUE
 )
 }
 \arguments{
@@ -34,6 +36,10 @@ add_prompt(
 \item{animate}{Boolean indicating whether there is a small animation when the tooltip appears. Default is `TRUE`.}
 
 \item{bounce}{Boolean indicating whether there is a small boucing animation when the tooltip appears. Default is `FALSE`.}
+
+\item{arrow}{Boolean indicating whether there is an arrow on the tooltip. Default is `TRUE`.}
+
+\item{shadow}{Boolean indicating whether there should be a shadow effect. Default is `TRUE`.}
 }
 \value{
 A tooltip when hovering the element concerned.

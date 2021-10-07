@@ -9,6 +9,8 @@
 #' @param rounded Boolean indicating whether the corners of the tooltip should be rounded. Default is `FALSE`.
 #' @param animate Boolean indicating whether there is a small animation when the tooltip appears. Default is `TRUE`.
 #' @param bounce Boolean indicating whether there is a small boucing animation when the tooltip appears. Default is `FALSE`.
+#' @param arrow Boolean indicating whether there is an arrow on the tooltip. Default is `TRUE`.
+#' @param shadow Boolean indicating whether there should be a shadow effect. Default is `TRUE`.
 #'
 #' @return A tooltip when hovering the element concerned.
 #' @export
@@ -46,7 +48,19 @@
 #' shinyApp(ui, server)
 #' }
 
-add_prompt <- function(ui_element, position = "bottom", message = NULL, type = NULL, size = NULL, permanent = FALSE, rounded = FALSE, animate = TRUE, bounce = FALSE) {
+add_prompt <- function(
+  ui_element,
+  position = "bottom",
+  message = NULL,
+  type = NULL,
+  size = NULL,
+  permanent = FALSE,
+  rounded = FALSE,
+  animate = TRUE,
+  bounce = FALSE,
+  arrow = TRUE,
+  shadow = TRUE
+) {
 
   if (missing(message)) {
     stop("Must pass a message")
@@ -70,7 +84,21 @@ add_prompt <- function(ui_element, position = "bottom", message = NULL, type = N
     animate <- "no-animate"
   }
 
-  opts <- c(unlist(opts), animate)
+  if (isTRUE(arrow)) {
+    arrow <- NULL
+  } else {
+    arrow <- "no-arrow"
+  }
+
+  if (isTRUE(shadow)) {
+    shadow <- NULL
+  } else {
+    shadow <- "no-shadow"
+  }
+
+  opts <- c(unlist(opts), animate, arrow, shadow)
+  opts[which(grepl("permanent", opts))] <- "always"
+
 
   if (ui_element$name == "img") {
 
